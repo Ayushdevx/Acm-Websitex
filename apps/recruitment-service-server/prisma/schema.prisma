@@ -1,0 +1,60 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Applicant {
+  areasOfInterest        String?
+  branch                 String?
+  createdAt              DateTime @default(now())
+  currentClubMemberships String?
+  email                  String?
+  expectations           String?
+  fullName               String?
+  gitHubProfile          String?
+  id                     String   @id @default(cuid())
+  linkedInProfile        String?
+  motivation             String?
+  phoneNumber            Int?
+  preferredDepartment    String?
+  previousProjects       String?
+  referral               String?
+  registrationNumber     String?
+  technicalSkills        String?
+  updatedAt              DateTime @updatedAt
+  year                   Int?
+}
+
+model Application {
+  createdAt      DateTime               @default(now())
+  id             String                 @id @default(cuid())
+  status         EnumApplicationStatus?
+  submissionDate DateTime?
+  updatedAt      DateTime               @updatedAt
+}
+
+model Interview {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  notes     String?
+  schedule  DateTime?
+  updatedAt DateTime  @updatedAt
+}
+
+model Position {
+  closeDate   DateTime?
+  createdAt   DateTime  @default(now())
+  description String?
+  id          String    @id @default(cuid())
+  openDate    DateTime?
+  title       String?
+  updatedAt   DateTime  @updatedAt
+}
+
+enum EnumApplicationStatus {
+  Option1
+}
